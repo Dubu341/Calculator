@@ -15,6 +15,7 @@ let firstNum = "";
 let secondNum = "";
 let varOperator = "";
 let result = "";
+//let isFired = false;
 const numBtn = document.querySelectorAll("button");
 const addBtn = document.querySelector(".add");
 const subtractBtn = document.querySelector(".subtract");
@@ -24,6 +25,7 @@ const equalBtn = document.querySelector(".equal");
 const clrBtn = document.querySelector(".clear");
 const display = document.querySelector(".display");
 display.textContent = "0";
+
 const operate = function (a, op, b) {
   if (a === "" || b === "" || !op) {
     return;
@@ -53,7 +55,13 @@ const operate = function (a, op, b) {
   varOperator = "";
   result = "";
 };
-
+const allClear = function () {
+  firstNum = "";
+  secondNum = "";
+  varOperator = "";
+  result = "";
+  display.textContent = "0";
+};
 numBtn.forEach((button) => {
   button.addEventListener("click", () => {
     if (varOperator === "") {
@@ -65,7 +73,7 @@ numBtn.forEach((button) => {
     }
   });
 });
-// fix : double clicking operators clears display
+// fix : double clicking operators hides display
 // do:clear calculator if a number is entered after = instead of an operator;
 //fix : operator changing if entered in sequence
 function selectOperator(operator) {
@@ -78,25 +86,26 @@ function selectOperator(operator) {
 
 addBtn.addEventListener("click", () => {
   selectOperator("+");
+  //  isFired = false;
 });
 subtractBtn.addEventListener("click", () => {
+  // isFired = false;
   selectOperator("-");
 });
 multiplyBtn.addEventListener("click", () => {
+  // isFired = false;
   selectOperator("*");
 });
 divBtn.addEventListener("click", () => {
+  //  isFired = false;
   selectOperator("/");
 });
 equalBtn.addEventListener("click", () => {
   operate(firstNum, varOperator, secondNum);
   if (secondNum !== "") {
   }
+  //  isFired = true;
 });
 clrBtn.addEventListener("click", () => {
-  firstNum = "";
-  secondNum = "";
-  varOperator = "";
-  result = "";
-  display.textContent = "0";
+  allClear();
 });
