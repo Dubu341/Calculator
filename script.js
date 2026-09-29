@@ -46,15 +46,14 @@ const operate = function (firstNum, varOperator, secondNum) {
       result = multiply(num1, num2);
       break;
   }
-  display.textContent = result;
-  console.log(result);
+  display.textContent = result.toString();
+  //dont work
 };
 
 numBtn.forEach((button) => {
   button.addEventListener("click", () => {
     if (varOperator === "") {
       firstNum += button.id;
-
       display.textContent = firstNum;
     } else {
       secondNum += button.id;
@@ -62,9 +61,15 @@ numBtn.forEach((button) => {
     }
   });
 });
+//to fix : double clicking operators clears display
 function selectOperator(operator) {
   if (firstNum === "" && secondNum === "") return;
-
+  if (firstNum !== "" && secondNum !== "") {
+    operate(firstNum, varOperator, secondNum);
+    firstNum = result.toString();
+    secondNum = "";
+    varOperator = "";
+  }
   varOperator = operator;
 }
 
