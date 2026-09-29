@@ -23,7 +23,21 @@ const multiplyBtn = document.querySelector(".multiply");
 const divBtn = document.querySelector(".divide");
 const equalBtn = document.querySelector(".requal");
 const clrBtn = document.querySelector(".clear");
+const display = document.querySelector(".display");
 
 const operate = function (firstNum, operator, secondNum) {
   operator(firstNum, secondNum);
 };
+
+numBtn.forEach((button) => {
+  button.addEventListener("click", (button) => {
+    if (operator === "") {
+      firstNum += button.target.id;
+      console.log(firstNum);
+      display.textContent = firstNum;
+    } else {
+      secondNum += button.target.id;
+      display.textContent = secondNum;
+    }
+  });
+});
