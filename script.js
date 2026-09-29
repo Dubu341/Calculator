@@ -15,8 +15,8 @@ let firstNum = "";
 let secondNum = "";
 let varOperator = "";
 let result = "";
-//let isFired = false;
-const numBtn = document.querySelectorAll("button");
+let isFired = false;
+const numBtn = document.querySelectorAll(".numbers");
 const addBtn = document.querySelector(".add");
 const subtractBtn = document.querySelector(".subtract");
 const multiplyBtn = document.querySelector(".multiply");
@@ -54,6 +54,7 @@ const operate = function (a, op, b) {
   secondNum = "";
   varOperator = "";
   result = "";
+  isFired = true;
 };
 const allClear = function () {
   firstNum = "";
@@ -61,50 +62,53 @@ const allClear = function () {
   varOperator = "";
   result = "";
   display.textContent = "0";
+  isFired = false;
 };
-numBtn.forEach((button) => {
-  button.addEventListener("click", () => {
+numBtn.forEach((number) => {
+  number.addEventListener("click", () => {
+    if (isFired === true) {
+      allClear();
+    }
     if (varOperator === "") {
-      firstNum += button.id;
+      firstNum += number.id;
       display.textContent = firstNum;
     } else {
-      secondNum += button.id;
+      secondNum += number.id;
       display.textContent = secondNum;
     }
   });
 });
-// fix : double clicking operators hides display
-// do:clear calculator if a number is entered after = instead of an operator;
+// fix : clicking empty space between numbers after an operator hides display
 //fix : operator changing if entered in sequence
 function selectOperator(operator) {
   if (firstNum === "" && secondNum === "") return;
   if (firstNum !== "" && secondNum !== "") {
     operate(firstNum, varOperator, secondNum);
+    isFired = false;
   }
   varOperator = operator;
 }
 
 addBtn.addEventListener("click", () => {
+  isFired = false;
   selectOperator("+");
-  //  isFired = false;
 });
 subtractBtn.addEventListener("click", () => {
-  // isFired = false;
+  isFired = false;
   selectOperator("-");
 });
 multiplyBtn.addEventListener("click", () => {
-  // isFired = false;
+  isFired = false;
   selectOperator("*");
 });
 divBtn.addEventListener("click", () => {
-  //  isFired = false;
+  isFired = false;
   selectOperator("/");
 });
 equalBtn.addEventListener("click", () => {
   operate(firstNum, varOperator, secondNum);
   if (secondNum !== "") {
   }
-  //  isFired = true;
 });
 clrBtn.addEventListener("click", () => {
   allClear();
