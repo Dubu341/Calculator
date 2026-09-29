@@ -7,31 +7,52 @@ const subtract = function (a, b) {
 const divide = function (a, b) {
   return a / b;
 };
-const multiply = function (array) {
-  return array.reduce((product, current) => product * current);
+const multiply = function (a, b) {
+  return a * b;
 };
 
 let firstNum = "";
 let secondNum = "";
-let operator = "";
-let result = "";
-
+let varOperator = "";
+let result = 0;
 const numBtn = document.querySelectorAll("button");
 const addBtn = document.querySelector(".add");
 const subtractBtn = document.querySelector(".subtract");
 const multiplyBtn = document.querySelector(".multiply");
 const divBtn = document.querySelector(".divide");
-const equalBtn = document.querySelector(".requal");
+const equalBtn = document.querySelector(".equal");
 const clrBtn = document.querySelector(".clear");
 const display = document.querySelector(".display");
 
-const operate = function (firstNum, operator, secondNum) {
-  operator(firstNum, secondNum);
+const operate = function (firstNum, varOperator, secondNum) {
+  if (firstNum === "" || secondNum === "" || !varOperator) {
+    return;
+  }
+  let num1 = parseFloat(firstNum);
+  let num2 = parseFloat(secondNum);
+
+  switch (varOperator) {
+    case "+":
+      result = add(num1, num2);
+      break;
+    case "-":
+      result = subtract(num1, num2);
+      break;
+    case "/":
+      result = num2 !== 0 ? divide(num1, num2) : "You shouldnt do that";
+      break;
+
+    case "*":
+      result = multiply(num1, num2);
+      break;
+  }
+  display.textContent = result;
+  console.log(result);
 };
 
 numBtn.forEach((button) => {
   button.addEventListener("click", () => {
-    if (operator === "") {
+    if (varOperator === "") {
       firstNum += button.id;
 
       display.textContent = firstNum;
@@ -41,26 +62,24 @@ numBtn.forEach((button) => {
     }
   });
 });
-function selectOperator(op) {
-  if (firstNum === "") return;
-  if (secondNum !== "") {
-    operate();
-  }
-  operator = op;
-  secondNum = firstNum;
-  firstNum = "";
+function selectOperator(operator) {
+  if (firstNum === "" && secondNum === "") return;
+
+  varOperator = operator;
 }
 
 addBtn.addEventListener("click", () => {
-  operator = addBtn.textContent;
+  selectOperator("+");
 });
-
 subtractBtn.addEventListener("click", () => {
-  operator = subtractBtn.textContent;
+  selectOperator("-");
 });
 multiplyBtn.addEventListener("click", () => {
-  operator = multiplyBtn.textContent;
+  selectOperator("*");
 });
 divBtn.addEventListener("click", () => {
-  operator = divBtn.textContent;
+  selectOperator("/");
+});
+equalBtn.addEventListener("click", () => {
+  operate(firstNum, varOperator, secondNum);
 });
