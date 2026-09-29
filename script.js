@@ -30,14 +30,37 @@ const operate = function (firstNum, operator, secondNum) {
 };
 
 numBtn.forEach((button) => {
-  button.addEventListener("click", (button) => {
+  button.addEventListener("click", () => {
     if (operator === "") {
-      firstNum += button.target.id;
-      console.log(firstNum);
+      firstNum += button.id;
+
       display.textContent = firstNum;
     } else {
-      secondNum += button.target.id;
+      secondNum += button.id;
       display.textContent = secondNum;
     }
   });
+});
+function selectOperator(op) {
+  if (firstNum === "") return;
+  if (secondNum !== "") {
+    operate();
+  }
+  operator = op;
+  secondNum = firstNum;
+  firstNum = "";
+}
+
+addBtn.addEventListener("click", () => {
+  operator = addBtn.textContent;
+});
+
+subtractBtn.addEventListener("click", () => {
+  operator = subtractBtn.textContent;
+});
+multiplyBtn.addEventListener("click", () => {
+  operator = multiplyBtn.textContent;
+});
+divBtn.addEventListener("click", () => {
+  operator = divBtn.textContent;
 });
