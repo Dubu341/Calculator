@@ -14,7 +14,7 @@ const multiply = function (a, b) {
 let firstNum = "";
 let secondNum = "";
 let varOperator = "";
-let result = 0;
+let result = "";
 const numBtn = document.querySelectorAll("button");
 const addBtn = document.querySelector(".add");
 const subtractBtn = document.querySelector(".subtract");
@@ -23,15 +23,15 @@ const divBtn = document.querySelector(".divide");
 const equalBtn = document.querySelector(".equal");
 const clrBtn = document.querySelector(".clear");
 const display = document.querySelector(".display");
-
-const operate = function (firstNum, varOperator, secondNum) {
-  if (firstNum === "" || secondNum === "" || !varOperator) {
+display.textContent = "0";
+const operate = function (a, op, b) {
+  if (a === "" || b === "" || !op) {
     return;
   }
-  let num1 = parseFloat(firstNum);
-  let num2 = parseFloat(secondNum);
+  let num1 = parseFloat(a);
+  let num2 = parseFloat(b);
 
-  switch (varOperator) {
+  switch (op) {
     case "+":
       result = add(num1, num2);
       break;
@@ -39,14 +39,19 @@ const operate = function (firstNum, varOperator, secondNum) {
       result = subtract(num1, num2);
       break;
     case "/":
-      result = num2 !== 0 ? divide(num1, num2) : "You shouldnt do that";
+      result = num2 !== 0 ? divide(num1, num2) : "You should'nt do that";
       break;
 
     case "*":
       result = multiply(num1, num2);
       break;
   }
+
   display.textContent = result.toString();
+  firstNum = result.toString();
+  secondNum = "";
+  varOperator = "";
+  result = "";
 };
 
 numBtn.forEach((button) => {
@@ -67,9 +72,6 @@ function selectOperator(operator) {
   if (firstNum === "" && secondNum === "") return;
   if (firstNum !== "" && secondNum !== "") {
     operate(firstNum, varOperator, secondNum);
-    firstNum = result.toString();
-    secondNum = "";
-    varOperator = "";
   }
   varOperator = operator;
 }
@@ -88,10 +90,13 @@ divBtn.addEventListener("click", () => {
 });
 equalBtn.addEventListener("click", () => {
   operate(firstNum, varOperator, secondNum);
+  if (secondNum !== "") {
+  }
 });
 clrBtn.addEventListener("click", () => {
   firstNum = "";
   secondNum = "";
   varOperator = "";
-  display.textContent = "";
+  result = "";
+  display.textContent = "0";
 });
