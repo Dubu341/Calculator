@@ -47,7 +47,6 @@ const operate = function (firstNum, varOperator, secondNum) {
       break;
   }
   display.textContent = result.toString();
-  //dont work
 };
 
 numBtn.forEach((button) => {
@@ -61,7 +60,9 @@ numBtn.forEach((button) => {
     }
   });
 });
-//to fix : double clicking operators clears display
+// fix : double clicking operators clears display
+// do:clear calculator if a number is entered after = instead of an operator;
+//fix : operator changing if entered in sequence
 function selectOperator(operator) {
   if (firstNum === "" && secondNum === "") return;
   if (firstNum !== "" && secondNum !== "") {
@@ -87,4 +88,10 @@ divBtn.addEventListener("click", () => {
 });
 equalBtn.addEventListener("click", () => {
   operate(firstNum, varOperator, secondNum);
+});
+clrBtn.addEventListener("click", () => {
+  firstNum = "";
+  secondNum = "";
+  varOperator = "";
+  display.textContent = "";
 });
