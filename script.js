@@ -78,7 +78,6 @@ numBtn.forEach((number) => {
     }
   });
 });
-// fix : clicking empty space between numbers after an operator hides display
 //fix : operator changing if entered in sequence
 function selectOperator(operator) {
   if (firstNum === "" && secondNum === "") return;
