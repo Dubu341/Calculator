@@ -16,6 +16,8 @@ let secondNum = "";
 let varOperator = "";
 let result = "";
 let isFired = false;
+// let decimal = "";
+// let decimalIsFired = false;
 const numBtn = document.querySelectorAll(".numbers");
 const addBtn = document.querySelector(".add");
 const subtractBtn = document.querySelector(".subtract");
@@ -24,6 +26,7 @@ const divBtn = document.querySelector(".divide");
 const equalBtn = document.querySelector(".equal");
 const clrBtn = document.querySelector(".clear");
 const display = document.querySelector(".display");
+// const decimalBtn = document.querySelector(".decimal");
 display.textContent = "0";
 
 const operate = function (a, op, b) {
@@ -54,6 +57,8 @@ const operate = function (a, op, b) {
   secondNum = "";
   varOperator = "";
   result = "";
+  // decimal = "";
+  // decimalIsFired = false;
   isFired = true;
 };
 const allClear = function () {
@@ -61,7 +66,9 @@ const allClear = function () {
   secondNum = "";
   varOperator = "";
   result = "";
+  // decimal = "";
   display.textContent = "0";
+  // decimalIsFired = false;
   isFired = false;
 };
 numBtn.forEach((number) => {
@@ -76,6 +83,7 @@ numBtn.forEach((number) => {
       secondNum += number.id;
       display.textContent = secondNum;
     }
+    // decimal = "";
   });
 });
 //fix : operator changing if entered in sequence
@@ -90,18 +98,22 @@ function selectOperator(operator) {
 
 addBtn.addEventListener("click", () => {
   isFired = false;
+  // decimalIsFired = false;
   selectOperator("+");
 });
 subtractBtn.addEventListener("click", () => {
   isFired = false;
+  // decimalIsFired = false;
   selectOperator("-");
 });
 multiplyBtn.addEventListener("click", () => {
   isFired = false;
+  // decimalIsFired = false;
   selectOperator("*");
 });
 divBtn.addEventListener("click", () => {
   isFired = false;
+  // decimalIsFired = false;
   selectOperator("/");
 });
 equalBtn.addEventListener("click", () => {
@@ -112,3 +124,16 @@ equalBtn.addEventListener("click", () => {
 clrBtn.addEventListener("click", () => {
   allClear();
 });
+
+// unfinished
+// decimalBtn.addEventListener("click", () => {
+//   if (isFired === true) {
+//     allClear();
+//   }
+//   if (decimalIsFired === true) {
+//     return;
+//   }
+//   decimal = decimalBtn.id;
+//   display.textContent += decimal;
+//   decimalIsFired = true;
+// });
